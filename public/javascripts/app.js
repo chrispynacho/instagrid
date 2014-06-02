@@ -11,7 +11,7 @@ instaGridApp.config(['$routeProvider', '$locationProvider',
       templateUrl: 'partials/grid.html',
       controller: 'GridCtrl'
     })
-    .when('/city/:cityId', {
+    .when('/#:cityId', {
       templateUrl: 'partials/grid.html',
       controller: 'GridCtrl'
     })

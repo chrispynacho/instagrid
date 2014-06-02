@@ -1,8 +1,8 @@
 <div id="controls">
-  <select ng-model="currLocation" ng-options="location.name for (abbr,location) in locations" ng-change="loadGrid()"></select>
+  <select ng-model="currLocation" ng-options="location.name for location in locations" ng-change="loadGrid()"></select>
 </div>
 <div id="grid">
-  <div ng-repeat="image in images">
+  <div class="cell" ng-repeat="image in images">
     <img src={{image.thumbnail}}>
   </div>
 </div>
