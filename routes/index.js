@@ -2,8 +2,10 @@ var express = require('express');
 var request = require('superagent');
 var router = express.Router();
 var dash = require('lodash');
+var config = require('../config');
 
-var clientId = 'd35bd9e9f2c74638b038c148e3087643';
+var clientId = config.instagram.clientId;
+var clientSecret = config.instagram.clientSecret;
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -34,17 +36,22 @@ function instagramGeoSearch(lat, long, callback) {
     .get(url)
     .end(function(err, data) {
       if (data && data.body.data) {
+        //console.log(data.body);
         var imageData = dash.map(data.body.data, function(img) {
           return {
             id: img.id || 0,
+            timestamp: img.created_time || '',
             likesCount: img.likes && img.likes.count || 0,
             locationName: img.location && img.location.name || '',
             thumbnail: img.images && img.images.thumbnail && img.images.thumbnail.url || '',
-            url: img.images && img.images.standard_resolution && img.images.standard_resolution.url || '',
+            medium: img.images && img.images.low_resolution && img.images.low_resolution.url || '',
+            original: img.images && img.images.standard_resolution && img.images.standard_resolution.url || '',
             user: img.user || {}
           };
         });
-        console.log('imageData:', imageData);
+
+        console.log('maxTimestamp', dash.max(data.body.data, 'created_time').created_time);
+
         callback(null, imageData);
       } else {
         callback(err, data);
