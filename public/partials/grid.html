@@ -1,8 +1,25 @@
-<div id="controls">
-  <select ng-model="currLocation" ng-options="location.name for location in locations" ng-change="loadGrid()"></select>
-</div>
-<div id="grid">
-  <div class="cell" ng-repeat="image in images">
-    <img src={{image.thumbnail}}>
+<nav id="controls">
+  <ul>
+    <li ng-model="currLocation" ng-repeat="location in locations">
+      <a href="#{{location.id}}">
+      {{location.name}}
+      </a>
+    </li>
+  </ul>
+</nav>
+<div id="grid-wrap">
+  <div id="grid">
+    <div class="cell" ng-repeat="image in images">
+      <div class="cell-content">
+        <img class="cell-face cell-image" src={{image.medium}}>
+        <div class="cell-face cell-info">
+          <div class="name"><a href="http://twitter.com/{{image.user.username}}" target="_blank">{{image.user.full_name}}</a></div>
+          <img class="profile-picture" src="{{image.user.profile_picture}}">
+          <div class="likes">{{image.likesCount}} likes</div>
+          <div class="date">{{image.timestamp | formatTimestamp}}</div>
+          <div class="location">{{image.locationName | coalesce:currLocation.name}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

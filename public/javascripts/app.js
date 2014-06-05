@@ -7,16 +7,12 @@ var instaGridApp = angular.module('instaGridApp', [
 instaGridApp.config(['$routeProvider', '$locationProvider', 
   function routes($routeProvider, $locationProvider) {
     $routeProvider
-    .when('/', {
-      templateUrl: 'partials/grid.html',
-      controller: 'GridCtrl'
-    })
-    .when('/#:cityId', {
-      templateUrl: 'partials/grid.html',
+    .when('/city/', {
+      templateUrl: '/partials/grid.html',
       controller: 'GridCtrl'
     })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/city/'
     });
     $locationProvider.html5Mode(true);
   }

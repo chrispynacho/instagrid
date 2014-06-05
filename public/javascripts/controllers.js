@@ -16,6 +16,8 @@ var locations = [
 
 instaGridControllers.controller('GridCtrl', ['$scope', '$routeParams', '$location', 'Images',
   function GridCtrl($scope, $routeParams, $location, Images) {
+    console.log('$routeParams', $routeParams);
+    console.log('$location', $location);
     if ($location.hash() == '') {
       $location.hash('sfo');
     }
@@ -25,10 +27,17 @@ instaGridControllers.controller('GridCtrl', ['$scope', '$routeParams', '$locatio
     var cityId = $location.hash();
     $scope.currLocation = _.find(locations, {id: cityId});
     $scope.images = Images.query({lat: $scope.currLocation.lat, lng: $scope.currLocation.long});
-
-    $scope.loadGrid = function loadGrid() {
-      // Causes the controller to reload
-      $location.hash($scope.currLocation.id);
-    };
   }
 ]);
+
+instaGridControllers.filter('formatTimestamp', function() {
+  return function(unix_timestamp) {
+    return moment.unix(unix_timestamp).fromNow();
+  }
+});
+
+instaGridControllers.filter('coalesce', function() {
+  return function() {
+    return _.chain(arguments).compact().first().value();
+  }
+});

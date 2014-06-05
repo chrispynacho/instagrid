@@ -8,7 +8,7 @@ var clientId = config.instagram.clientId;
 var clientSecret = config.instagram.clientSecret;
 
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/city', function(req, res) {
   res.render('index', { title: 'Instagrid' });
 });
 
