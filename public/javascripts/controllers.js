@@ -27,6 +27,12 @@ instaGridControllers.controller('GridCtrl', ['$scope', '$routeParams', '$locatio
     var cityId = $location.hash();
     $scope.currLocation = _.find(locations, {id: cityId});
     $scope.images = Images.query({lat: $scope.currLocation.lat, lng: $scope.currLocation.long});
+
+    $scope.toggleMenu = function () {
+      angular.element('.st-container')
+        .toggleClass('st-effect-1')
+        .toggleClass('st-menu-open');
+    }
   }
 ]);
 

@@ -1,9 +1,10 @@
 extends layout
 
 block content
-  #container
+  #container.st-container
     div(ng-view)
 
+  script(src='/javascripts/bower_components/jquery/dist/jquery.js')
   script(src='/javascripts/bower_components/moment/moment.js')
   script(src='/javascripts/bower_components/lodash/dist/lodash.js')
   script(src='/javascripts/bower_components/angular/angular.js')

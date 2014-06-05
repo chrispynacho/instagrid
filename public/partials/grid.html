@@ -1,14 +1,15 @@
-<nav id="controls">
+<button id="menu-toggle" ng-Click="toggleMenu()"><img src="/images/hamburger-icon.png"></button>
+<nav id="controls" class="st-menu st-effect-1">
   <ul>
-    <li ng-model="currLocation" ng-repeat="location in locations">
+    <li ng-model="currLocation" ng-repeat="location in locations" ng-click="toggleMenu()">
       <a href="#{{location.id}}">
       {{location.name}}
       </a>
     </li>
   </ul>
 </nav>
-<div id="grid-wrap">
-  <div id="grid">
+<div id="grid-wrap" class="st-content">
+  <div id="grid" class="st-content-inner">
     <div class="cell" ng-repeat="image in images">
       <div class="cell-content">
         <img class="cell-face cell-image" src={{image.medium}}>
